@@ -1,5 +1,5 @@
-import { STEP } from './constants.js';
-import { Dirt } from './dirt.js';
+import { STEP } from './constants';
+import { Dirt } from './dirt';
 
 const canvas = document.getElementById('canvas');
 const canvasContext = canvas.getContext('2d');
@@ -26,16 +26,16 @@ for (let i = 0; i < displaySizeX; i++) {
 }
 
 const game = () => {
-    dirtLevel.forEach((dirtLevelRow, y) => {
-      dirtLevelRow.forEach((dirtLevelBlock, x) => {
-        dirtLevelBlock.render(canvasContext, x, y);
-      });
+  dirtLevel.forEach((dirtLevelRow, y) => {
+    dirtLevelRow.forEach((dirtLevelBlock, x) => {
+      dirtLevelBlock.render(canvasContext, x, y);
     });
-  }
+  });
+};
 
 const gameLoop = () => {
   game();
   setTimeout(gameLoop, 100);
-}
+};
 
 gameLoop();

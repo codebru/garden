@@ -1,4 +1,4 @@
-import { drawBlock } from './draw.js';
+import { drawBlock } from './draw';
 
 const BROWN_1 = '#8B4513';
 const BROWN_2 = '#A0522D';
@@ -15,10 +15,10 @@ const pickDirtColor = () => {
     default:
       return BROWN_1;
   }
-}
+};
 
 class Dirt {
-  render(canvasContext, x, y) {
+  static render(canvasContext, x, y) {
     drawBlock(canvasContext, x, y, pickDirtColor());
   }
 }
