@@ -25,9 +25,17 @@ for (let i = 0; i < displaySizeX; i++) {
   dirtLevel.push(dirtLevelRow);
 }
 
-dirtLevel.forEach((dirtLevelRow, y) => {
-  dirtLevelRow.forEach((dirtLevelBlock, x) => {
-    dirtLevelBlock.render(canvasContext, x, y);
-  });
-});
+const game = () => {
+    dirtLevel.forEach((dirtLevelRow, y) => {
+      dirtLevelRow.forEach((dirtLevelBlock, x) => {
+        dirtLevelBlock.render(canvasContext, x, y);
+      });
+    });
+  }
 
+const gameLoop = () => {
+  game();
+  setTimeout(gameLoop, 100);
+}
+
+gameLoop();
