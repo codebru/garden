@@ -1,15 +1,10 @@
 import {
   colors,
 } from './constants';
+import { Block } from './block';
 
-const MIN_MOISTURE = 0;
-
-class Air {
-  constructor() {
-    this.moisture = 0;
-  }
-
-  getAirColor() {
+class Air extends Block {
+  getColor() {
     if (this.moisture > 0) {
       return colors.AIR_WET;
     }
@@ -31,24 +26,6 @@ class Air {
     if (this.moisture > 0) {
       this.validateMoistureTransfer(moistureTransferFunction, 0, 0, -1, this.moisture);
     }
-  }
-
-  changeMoisture(moistureToTransfer) {
-    if (this.moisture + moistureToTransfer > MIN_MOISTURE) {
-      this.moisture += moistureToTransfer;
-      return true;
-    }
-    return false;
-  }
-
-  render(renderFunction) {
-    renderFunction(this.getAirColor());
-  }
-
-  process(
-    moistureTransferFunction,
-  ) {
-    this.processMoisture(moistureTransferFunction);
   }
 }
 
