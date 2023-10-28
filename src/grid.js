@@ -99,7 +99,7 @@ class Grid {
     for (let i = 0; i < this.x; i++) {
       for (let ii = 0; ii < this.y; ii++) {
         for (let iii = this.z - 1; iii >= 0; iii--) {
-          if (this.grid[i][ii][iii] !== null) {
+          if (this.grid[i][ii][iii] !== null && this.grid[i][ii][iii].isVisible()) {
             this.renderBlock(i, ii, iii, renderFunction);
             break;
           }

@@ -5,6 +5,8 @@ import {
   DIRT_WET,
   DIRT_NORMAL,
   DIRT_DRY,
+  AIR_WET,
+  AIR_DRY,
 } from './colors';
 
 const STEP = 10;
@@ -28,6 +30,8 @@ const colors = {
   DIRT_WET,
   DIRT_NORMAL,
   DIRT_DRY,
+  AIR_WET,
+  AIR_DRY,
 };
 
 export {

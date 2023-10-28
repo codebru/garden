@@ -11,6 +11,11 @@ class Dirt {
     this.moisture = 0;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  isVisible() {
+    return true;
+  }
+
   dirtColor = () => {
     if (this.moisture > 66) {
       return colors.DIRT_WET;

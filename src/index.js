@@ -7,6 +7,7 @@ import {
   BLOCKS_PROCESSED_PER_STEP,
 } from './constants';
 import { Dirt } from './dirt';
+import { Air } from './air';
 import { drawBlock } from './draw';
 import { Grid } from './grid';
 
@@ -18,10 +19,12 @@ canvasContext.canvas.height = WINDOW_HEIGHT;
 
 const grid = new Grid(DISPLAY_SIZE_X, DISPLAY_SIZE_Y, LAYER_COUNT);
 
+grid.addLayer(2, () => new Air());
+grid.addLayer(1, () => new Air());
 grid.addLayer(0, () => new Dirt());
 
-grid.getBlock(3, 3, 0).changeMoisture(1000);
-grid.getBlock(6, 9, 0).changeMoisture(1000);
+grid.getBlock(3, 3, 2).changeMoisture(1000);
+grid.getBlock(6, 9, 2).changeMoisture(1000);
 
 const game = () => {
   for (let i = 0; i < BLOCKS_PROCESSED_PER_STEP; i++) {
