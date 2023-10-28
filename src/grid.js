@@ -59,12 +59,10 @@ class Grid {
     x,
     y,
     z,
-    renderFunction,
   ) => {
     if (!this.checkValidGridPosition(x, y, z)) throw new Error('Invalid grid position');
     if (this.grid[x][y][z] !== null) {
       this.grid[x][y][z].process(
-        renderFunction,
         (
           deltaX,
           deltaY,
@@ -84,6 +82,28 @@ class Grid {
     for (let i = 0; i < this.x; i++) {
       for (let ii = 0; ii < this.y; ii++) {
         this.addBlock(i, ii, z, block());
+      }
+    }
+  };
+
+  renderBlock = (x, y, z, renderFunction) => {
+    if (!this.checkValidGridPosition(x, y, z)) return false;
+    if (this.grid[x][y][z] !== null) {
+      this.grid[x][y][z].render((color) => renderFunction(x, y, color));
+      return true;
+    }
+    return false;
+  };
+
+  renderGrid = (renderFunction) => {
+    for (let i = 0; i < this.x; i++) {
+      for (let ii = 0; ii < this.y; ii++) {
+        for (let iii = this.z - 1; iii >= 0; iii--) {
+          if (this.grid[i][ii][iii] !== null) {
+            this.renderBlock(i, ii, iii, renderFunction);
+            break;
+          }
+        }
       }
     }
   };

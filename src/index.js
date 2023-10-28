@@ -4,6 +4,7 @@ import {
   DISPLAY_SIZE_X,
   DISPLAY_SIZE_Y,
   LAYER_COUNT,
+  BLOCKS_PROCESSED_PER_STEP,
 } from './constants';
 import { Dirt } from './dirt';
 import { drawBlock } from './draw';
@@ -23,21 +24,23 @@ grid.getBlock(3, 3, 0).changeMoisture(1000);
 grid.getBlock(6, 9, 0).changeMoisture(1000);
 
 const game = () => {
-  const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
-  const randomY = Math.floor(Math.random() * DISPLAY_SIZE_Y);
-  const randomZ = Math.floor(Math.random() * LAYER_COUNT);
+  for (let i = 0; i < BLOCKS_PROCESSED_PER_STEP; i++) {
+    const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
+    const randomY = Math.floor(Math.random() * DISPLAY_SIZE_Y);
+    const randomZ = Math.floor(Math.random() * LAYER_COUNT);
 
-  grid.processBlock(
-    randomX,
-    randomY,
-    randomZ,
-    (color) => drawBlock(canvasContext, randomX, randomY, color),
-  );
+    grid.processBlock(
+      randomX,
+      randomY,
+      randomZ,
+    );
+  }
+  grid.renderGrid((x, y, color) => drawBlock(canvasContext, x, y, color));
 };
 
 const gameLoop = () => {
   game();
-  setTimeout(gameLoop, 0);
+  setTimeout(gameLoop, 100);
 };
 
 gameLoop();

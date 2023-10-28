@@ -19,6 +19,8 @@ const DISPLAY_SIZE_Y = Math.ceil((WINDOW_HEIGHT / STEP) * SHRINK_FACTOR);
 
 const LAYER_COUNT = 3;
 
+const BLOCKS_PROCESSED_PER_STEP = 50;
+
 const colors = {
   BROWN_1,
   BROWN_2,
@@ -36,5 +38,6 @@ export {
   DISPLAY_SIZE_X,
   DISPLAY_SIZE_Y,
   LAYER_COUNT,
+  BLOCKS_PROCESSED_PER_STEP,
   colors,
 };

@@ -49,12 +49,9 @@ class Dirt {
   }
 
   process(
-    renderFunction,
     moistureTransferFunction,
   ) {
-    console.log('Dirt is being processed');
     this.processMoisture(moistureTransferFunction);
-    this.render(renderFunction);
   }
 }
 
