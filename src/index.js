@@ -1,43 +1,42 @@
-import { STEP } from './constants';
+import {
+  WINDOW_WIDTH,
+  WINDOW_HEIGHT,
+  DISPLAY_SIZE_X,
+  DISPLAY_SIZE_Y,
+  LAYER_COUNT,
+} from './constants';
 import { Dirt } from './dirt';
+import { drawBlock } from './draw';
+import { Grid } from './grid';
 
 const canvas = document.getElementById('canvas');
 const canvasContext = canvas.getContext('2d');
 
-const SHRINK_FACTOR = 0.1;
+canvasContext.canvas.width = WINDOW_WIDTH;
+canvasContext.canvas.height = WINDOW_HEIGHT;
 
-const width = window.innerWidth;
-const height = window.innerHeight;
+const grid = new Grid(DISPLAY_SIZE_X, DISPLAY_SIZE_Y, LAYER_COUNT);
 
-canvasContext.canvas.width = width;
-canvasContext.canvas.height = height;
+grid.addLayer(0, () => new Dirt());
 
-const displaySizeX = Math.ceil((height / STEP) * SHRINK_FACTOR);
-const displaySizeY = Math.ceil((width / STEP) * SHRINK_FACTOR);
-
-const dirtLevel = [];
-
-for (let i = 0; i < displaySizeX; i++) {
-  const dirtLevelRow = [];
-
-  for (let ii = 0; ii < displaySizeY; ii++) {
-    dirtLevelRow.push(new Dirt());
-  }
-
-  dirtLevel.push(dirtLevelRow);
-}
+grid.getBlock(3, 3, 0).changeMoisture(2000);
 
 const game = () => {
-  dirtLevel.forEach((dirtLevelRow, y) => {
-    dirtLevelRow.forEach((dirtLevelBlock, x) => {
-      dirtLevelBlock.render(canvasContext, x, y);
-    });
-  });
+  const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
+  const randomY = Math.floor(Math.random() * DISPLAY_SIZE_Y);
+  const randomZ = Math.floor(Math.random() * LAYER_COUNT);
+
+  grid.processBlock(
+    randomX,
+    randomY,
+    randomZ,
+    (color) => drawBlock(canvasContext, randomX, randomY, color),
+  );
 };
 
 const gameLoop = () => {
   game();
-  setTimeout(gameLoop, 100);
+  setTimeout(gameLoop, 0);
 };
 
 gameLoop();

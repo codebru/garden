@@ -1,29 +1,58 @@
-import { drawBlock } from './draw';
+import {
+  colors,
+} from './constants';
 
-const BROWN_1 = '#8B4513';
-const BROWN_2 = '#A0522D';
-const BROWN_3 = '#CD853F';
-
-const pickDirtColor = () => {
-  switch (Math.floor(Math.random() * 3) + 1) {
-    case 1:
-      return BROWN_1;
-    case 2:
-      return BROWN_2;
-    case 3:
-      return BROWN_3;
-    default:
-      return BROWN_1;
-  }
-};
+const SATURATED = 66;
+const MOISTURE_TRANSFER_RATE = 20;
+const MIN_MOISTURE = 0;
 
 class Dirt {
   constructor() {
-    this.color = pickDirtColor();
+    this.moisture = 0;
   }
 
-  render(canvasContext, x, y) {
-    drawBlock(canvasContext, x, y, this.color);
+  dirtColor = () => {
+    if (this.moisture > 66) {
+      return colors.DIRT_WET;
+    } if (this.moisture > 33) {
+      return colors.DIRT_NORMAL;
+    }
+    return colors.DIRT_DRY;
+  };
+
+  validateMoistureTransfer(moistureTransferFunction, x, y, z, moistureToTransfer) {
+    if (moistureTransferFunction(x, y, z, moistureToTransfer)) this.moisture -= moistureToTransfer;
+  }
+
+  processMoisture(moistureTransferFunction) {
+    if (this.moisture > SATURATED) {
+      const moistureToTransfer = MOISTURE_TRANSFER_RATE / 4;
+      this.validateMoistureTransfer(moistureTransferFunction, -1, 0, 0, moistureToTransfer);
+      this.validateMoistureTransfer(moistureTransferFunction, 1, 0, 0, moistureToTransfer);
+      this.validateMoistureTransfer(moistureTransferFunction, 0, 1, 0, moistureToTransfer);
+      this.validateMoistureTransfer(moistureTransferFunction, 0, -1, 0, moistureToTransfer);
+    }
+  }
+
+  changeMoisture(moistureToTransfer) {
+    if (this.moisture + moistureToTransfer > MIN_MOISTURE) {
+      this.moisture += moistureToTransfer;
+      return true;
+    }
+    return false;
+  }
+
+  render(renderFunction) {
+    renderFunction(this.dirtColor());
+  }
+
+  process(
+    renderFunction,
+    moistureTransferFunction,
+  ) {
+    console.log('Dirt is being processed');
+    this.processMoisture(moistureTransferFunction);
+    this.render(renderFunction);
   }
 }
 

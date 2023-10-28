@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --mode development",
     "start": "nodemon ./src/ --exec 'npm run build'",
     "lint": "eslint src",
     "lint:fix": "pnpm lint --fix",
