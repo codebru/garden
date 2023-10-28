@@ -5,6 +5,7 @@ import {
   DISPLAY_SIZE_Y,
   LAYER_COUNT,
   BLOCKS_PROCESSED_PER_STEP,
+  RAIN_PER_STEP,
 } from './constants';
 import { Dirt } from './dirt';
 import { Air } from './air';
@@ -23,10 +24,15 @@ grid.addLayer(2, () => new Air());
 grid.addLayer(1, () => new Air());
 grid.addLayer(0, () => new Dirt());
 
-grid.getBlock(3, 3, 2).changeMoisture(1000);
-grid.getBlock(6, 9, 2).changeMoisture(1000);
-
 const game = () => {
+  // Hacky rain implementation
+  for (let i = 0; i < RAIN_PER_STEP; i++) {
+    const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
+    const randomY = Math.floor(Math.random() * DISPLAY_SIZE_Y);
+
+    grid.getBlock(randomX, randomY, 2).changeMoisture(50);
+  }
+
   for (let i = 0; i < BLOCKS_PROCESSED_PER_STEP; i++) {
     const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
     const randomY = Math.floor(Math.random() * DISPLAY_SIZE_Y);
