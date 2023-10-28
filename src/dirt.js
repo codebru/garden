@@ -3,7 +3,7 @@ import {
 } from './constants';
 
 const SATURATED = 66;
-const MOISTURE_TRANSFER_RATE = 20;
+const MOISTURE_TRANSFER_RATE = 33;
 const MIN_MOISTURE = 0;
 
 class Dirt {
@@ -26,7 +26,9 @@ class Dirt {
 
   processMoisture(moistureTransferFunction) {
     if (this.moisture > SATURATED) {
-      const moistureToTransfer = MOISTURE_TRANSFER_RATE / 4;
+      let moistureToTransfer = (this.moisture - SATURATED) / 5;
+      if (moistureToTransfer < 1) moistureToTransfer = 1;
+
       this.validateMoistureTransfer(moistureTransferFunction, -1, 0, 0, moistureToTransfer);
       this.validateMoistureTransfer(moistureTransferFunction, 1, 0, 0, moistureToTransfer);
       this.validateMoistureTransfer(moistureTransferFunction, 0, 1, 0, moistureToTransfer);

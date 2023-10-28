@@ -19,7 +19,8 @@ const grid = new Grid(DISPLAY_SIZE_X, DISPLAY_SIZE_Y, LAYER_COUNT);
 
 grid.addLayer(0, () => new Dirt());
 
-grid.getBlock(3, 3, 0).changeMoisture(2000);
+grid.getBlock(3, 3, 0).changeMoisture(1000);
+grid.getBlock(6, 9, 0).changeMoisture(1000);
 
 const game = () => {
   const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);

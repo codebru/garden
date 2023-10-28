@@ -9,13 +9,13 @@ import {
 
 const STEP = 10;
 
-const SHRINK_FACTOR = 0.3;
+const SHRINK_FACTOR = 0.2;
 
 const WINDOW_WIDTH = window.innerWidth;
 const WINDOW_HEIGHT = window.innerHeight;
 
-const DISPLAY_SIZE_X = Math.ceil((WINDOW_HEIGHT / STEP) * SHRINK_FACTOR);
-const DISPLAY_SIZE_Y = Math.ceil((WINDOW_WIDTH / STEP) * SHRINK_FACTOR);
+const DISPLAY_SIZE_X = Math.ceil((WINDOW_WIDTH / STEP) * SHRINK_FACTOR);
+const DISPLAY_SIZE_Y = Math.ceil((WINDOW_HEIGHT / STEP) * SHRINK_FACTOR);
 
 const LAYER_COUNT = 3;
 
