@@ -18,7 +18,8 @@ const pickDirtColor = () => {
 };
 
 class Dirt {
-  static render(canvasContext, x, y) {
+  // eslint-disable-next-line class-methods-use-this
+  render(canvasContext, x, y) {
     drawBlock(canvasContext, x, y, pickDirtColor());
   }
 }
