@@ -4,14 +4,16 @@ import { Dirt } from './dirt';
 const canvas = document.getElementById('canvas');
 const canvasContext = canvas.getContext('2d');
 
+const SHRINK_FACTOR = 0.1;
+
 const width = window.innerWidth;
 const height = window.innerHeight;
 
 canvasContext.canvas.width = width;
 canvasContext.canvas.height = height;
 
-const displaySizeX = Math.ceil(height / STEP);
-const displaySizeY = Math.ceil(width / STEP);
+const displaySizeX = Math.ceil((height / STEP) * SHRINK_FACTOR);
+const displaySizeY = Math.ceil((width / STEP) * SHRINK_FACTOR);
 
 const dirtLevel = [];
 
