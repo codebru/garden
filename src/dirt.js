@@ -18,9 +18,12 @@ const pickDirtColor = () => {
 };
 
 class Dirt {
-  // eslint-disable-next-line class-methods-use-this
+  constructor() {
+    this.color = pickDirtColor();
+  }
+
   render(canvasContext, x, y) {
-    drawBlock(canvasContext, x, y, pickDirtColor());
+    drawBlock(canvasContext, x, y, this.color);
   }
 }
 
