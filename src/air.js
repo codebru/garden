@@ -18,10 +18,6 @@ class Air extends Block {
     return false;
   }
 
-  validateMoistureTransfer(moistureTransferFunction, x, y, z, moistureToTransfer) {
-    if (moistureTransferFunction(x, y, z, moistureToTransfer)) this.moisture -= moistureToTransfer;
-  }
-
   processMoisture(moistureTransferFunction) {
     if (this.moisture > 0) {
       this.validateMoistureTransfer(moistureTransferFunction, 0, 0, -1, this.moisture);

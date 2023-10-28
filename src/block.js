@@ -24,6 +24,10 @@ class Block {
     return false;
   }
 
+  validateMoistureTransfer(moistureTransferFunction, x, y, z, moistureToTransfer) {
+    if (moistureTransferFunction(x, y, z, moistureToTransfer)) this.moisture -= moistureToTransfer;
+  }
+
   processMoisture() {
     // do nothing
   }

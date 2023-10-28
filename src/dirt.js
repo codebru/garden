@@ -1,22 +1,12 @@
 import {
   colors,
 } from './constants';
+import { Block } from './block';
 
 const SATURATED = 66;
-const MOISTURE_TRANSFER_RATE = 33;
-const MIN_MOISTURE = 0;
 
-class Dirt {
-  constructor() {
-    this.moisture = 0;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  isVisible() {
-    return true;
-  }
-
-  dirtColor = () => {
+class Dirt extends Block {
+  getColor = () => {
     if (this.moisture > 66) {
       return colors.DIRT_WET;
     } if (this.moisture > 33) {
@@ -24,10 +14,6 @@ class Dirt {
     }
     return colors.DIRT_DRY;
   };
-
-  validateMoistureTransfer(moistureTransferFunction, x, y, z, moistureToTransfer) {
-    if (moistureTransferFunction(x, y, z, moistureToTransfer)) this.moisture -= moistureToTransfer;
-  }
 
   processMoisture(moistureTransferFunction) {
     if (this.moisture > SATURATED) {
@@ -39,24 +25,6 @@ class Dirt {
       this.validateMoistureTransfer(moistureTransferFunction, 0, 1, 0, moistureToTransfer);
       this.validateMoistureTransfer(moistureTransferFunction, 0, -1, 0, moistureToTransfer);
     }
-  }
-
-  changeMoisture(moistureToTransfer) {
-    if (this.moisture + moistureToTransfer > MIN_MOISTURE) {
-      this.moisture += moistureToTransfer;
-      return true;
-    }
-    return false;
-  }
-
-  render(renderFunction) {
-    renderFunction(this.dirtColor());
-  }
-
-  process(
-    moistureTransferFunction,
-  ) {
-    this.processMoisture(moistureTransferFunction);
   }
 }
 
