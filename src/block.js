@@ -57,6 +57,10 @@ class Block {
     // do nothing
   }
 
+  processPropogation() {
+    // do nothing
+  }
+
   render(renderFunction) {
     renderFunction(this.getColor());
   }
@@ -64,9 +68,11 @@ class Block {
   process(
     moistureTransferFunction,
     nutrientsTransferFunction,
+    propogateFunction,
   ) {
     this.processMoisture(moistureTransferFunction);
     this.processNutrients(nutrientsTransferFunction);
+    this.processPropogation(propogateFunction);
   }
 }
 

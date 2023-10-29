@@ -73,6 +73,10 @@ class Grid {
     if (validateBasedOnProbability(PROBABILITY_DECOMPOSE)) this.decomposeBlock(x, y, z, growth);
   };
 
+  propogateFunction = (x, y, z, block) => {
+    this.addBlock(x, y, z, block);
+  };
+
   processBlock = (
     x,
     y,
@@ -110,6 +114,17 @@ class Grid {
           y,
           z,
           growth,
+        ),
+        (
+          deltaX,
+          deltaY,
+          deltaZ,
+          block,
+        ) => this.propogateFunction(
+          x + deltaX,
+          y + deltaY,
+          z + deltaZ,
+          block,
         ),
       );
     }

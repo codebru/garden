@@ -1,6 +1,8 @@
 import {
   colors,
   MIN_MOISTURE,
+  PROPOGATION_PROBABILITY,
+  PROPOGATION_GROWTH_THRESHOLD,
   DRAW_PER_STEP_MOISTURE_PLANT,
   DRAW_PER_STEP_NUTRIENTS_PLANT,
   HEALTH_DROP_PER_STEP_PLANT,
@@ -20,7 +22,7 @@ import {
   GROWTH_COST_NUTRIENTS_PLANT,
 } from './constants';
 
-import { validateBasedOnProbability } from './utils';
+import { randomIntiger, validateBasedOnProbability } from './utils';
 
 import { Block } from './block';
 
@@ -159,10 +161,25 @@ class Plant extends Block {
     );
   }
 
+  processPropogation(propogateFunction) {
+    if (this.growth < PROPOGATION_GROWTH_THRESHOLD) return;
+    if (validateBasedOnProbability(PROPOGATION_PROBABILITY)) {
+      const randomX = randomIntiger(-2, 2);
+      const randomY = randomIntiger(-2, 2);
+      propogateFunction(
+        randomX,
+        randomY,
+        0,
+        new Plant(),
+      );
+    }
+  }
+
   process(
     moistureTransferFunction,
     nutrientsTransferFunction,
     decomposeFunction,
+    propogateFunction,
   ) {
     if (!this.isAlive()) {
       decomposeFunction(this.growth);
@@ -173,6 +190,7 @@ class Plant extends Block {
     this.runHealth();
     this.runSustain();
     this.runGrowth();
+    this.processPropogation(propogateFunction);
   }
 }
 
