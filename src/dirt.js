@@ -1,4 +1,5 @@
 import {
+  EVAPORATION_FROM_DIRT,
   colors,
 } from './constants';
 import { Block } from './block';
@@ -29,6 +30,21 @@ class Dirt extends Block {
       this.validateMoistureTransfer(moistureTransferFunction, 0, 1, 0, moistureToTransfer);
       this.validateMoistureTransfer(moistureTransferFunction, 0, -1, 0, moistureToTransfer);
     }
+  }
+
+  evaporate() {
+    if (this.moisture > EVAPORATION_FROM_DIRT) {
+      this.moisture -= EVAPORATION_FROM_DIRT;
+    }
+  }
+
+  process(
+    moistureTransferFunction,
+    nutrientsTransferFunction,
+  ) {
+    this.processMoisture(moistureTransferFunction);
+    this.processNutrients(nutrientsTransferFunction);
+    this.evaporate();
   }
 }
 
