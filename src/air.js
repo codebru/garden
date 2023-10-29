@@ -28,6 +28,12 @@ class Air extends Block {
       this.validateMoistureTransfer(moistureTransferFunction, 0, 0, -1, this.moisture);
     }
   }
+
+  processNutrients(nutrientsTransferFunction) {
+    if (this.nutrients > 0) {
+      this.validateNutrientsTransfer(nutrientsTransferFunction, 0, 0, -1, this.nutrients);
+    }
+  }
 }
 
 export { Air };
