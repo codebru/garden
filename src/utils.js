@@ -6,4 +6,9 @@ const validateBasedOnProbability = (probability) => {
   return false;
 };
 
-export { validateBasedOnProbability };
+const randomIntiger = (min, max) => {
+  const random = Math.random();
+  return Math.floor(random * (max - min + 1)) + min;
+};
+
+export { validateBasedOnProbability, randomIntiger };

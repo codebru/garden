@@ -12,7 +12,7 @@ import { Air } from './air';
 import { drawBlock } from './draw';
 import { Grid } from './grid';
 import { Plant } from './plant';
-import { validateBasedOnProbability } from './utils';
+import { randomIntiger, validateBasedOnProbability } from './utils';
 
 const canvas = document.getElementById('canvas');
 const canvasContext = canvas.getContext('2d');
@@ -39,7 +39,8 @@ grid.addBlock(4, 11, 1, new Plant());
 const rain = () => {
   // Hacky rain implementation
   // TODO: Put on a cycle so it rains for random amount of time at random points
-  for (let i = 0; i < RAIN_PER_STEP; i++) {
+  const rainDrops = randomIntiger(0, RAIN_PER_STEP);
+  for (let i = 0; i < rainDrops; i++) {
     const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
     const randomY = Math.floor(Math.random() * DISPLAY_SIZE_Y);
 
@@ -50,7 +51,7 @@ const rain = () => {
 };
 
 const game = () => {
-  if (validateBasedOnProbability(0.01)) rain();
+  if (validateBasedOnProbability(0.001)) rain();
 
   for (let i = 0; i < BLOCKS_PROCESSED_PER_STEP; i++) {
     const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
