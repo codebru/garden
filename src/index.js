@@ -24,14 +24,29 @@ grid.addLayer(2, () => new Air());
 grid.addLayer(1, () => new Air());
 grid.addLayer(0, () => new Dirt());
 
-const game = () => {
+const validateBasedOnProbability = (probability) => {
+  const random = Math.random();
+  if (random < probability) {
+    return true;
+  }
+  return false;
+};
+
+const rain = () => {
   // Hacky rain implementation
+  // TODO: Put on a cycle so it rains for random amount of time at random points
   for (let i = 0; i < RAIN_PER_STEP; i++) {
     const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
     const randomY = Math.floor(Math.random() * DISPLAY_SIZE_Y);
 
-    grid.getBlock(randomX, randomY, 2).changeMoisture(50);
+    grid.getBlock(randomX, randomY, 2).changeMoisture(300);
   }
+
+  if (validateBasedOnProbability(0.95)) setTimeout(rain, 100);
+};
+
+const game = () => {
+  if (validateBasedOnProbability(0.01)) rain();
 
   for (let i = 0; i < BLOCKS_PROCESSED_PER_STEP; i++) {
     const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
