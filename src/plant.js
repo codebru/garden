@@ -100,13 +100,42 @@ class Plant extends Block {
   processMoisture(moistureTransferFunction) {
     if (!this.isAlive()) return;
     if (this.moisture >= 100) return;
+    const drawPerCell = DRAW_PER_STEP_MOISTURE_PLANT / 5;
 
     this.validateMoistureTransfer(
       moistureTransferFunction,
       0,
       0,
       -1,
-      -DRAW_PER_STEP_MOISTURE_PLANT,
+      -drawPerCell,
+    );
+    this.validateMoistureTransfer(
+      moistureTransferFunction,
+      0,
+      1,
+      -1,
+      -drawPerCell,
+    );
+    this.validateMoistureTransfer(
+      moistureTransferFunction,
+      1,
+      0,
+      -1,
+      -drawPerCell,
+    );
+    this.validateMoistureTransfer(
+      moistureTransferFunction,
+      0,
+      -1,
+      -1,
+      -drawPerCell,
+    );
+    this.validateMoistureTransfer(
+      moistureTransferFunction,
+      -1,
+      0,
+      -1,
+      -drawPerCell,
     );
 
     moistureTransferFunction(
