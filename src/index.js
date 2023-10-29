@@ -69,7 +69,7 @@ const game = () => {
 
 const gameLoop = () => {
   game();
-  setTimeout(gameLoop, 100);
+  setTimeout(gameLoop, 1);
 };
 
 gameLoop();
