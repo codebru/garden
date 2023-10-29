@@ -2,10 +2,12 @@
 import { colors } from './constants';
 
 const MIN_MOISTURE = 0;
+const MIN_NUTRIENTS = 0;
 
 class Block {
   constructor() {
     this.moisture = 0;
+    this.nutrients = 0;
   }
 
   getColor() {
@@ -24,11 +26,27 @@ class Block {
     return false;
   }
 
+  changeNutrients(nutrientsToTransfer) {
+    if (this.nutrients + nutrientsToTransfer > MIN_NUTRIENTS) {
+      this.nutrients += nutrientsToTransfer;
+      return true;
+    }
+    return false;
+  }
+
   validateMoistureTransfer(moistureTransferFunction, x, y, z, moistureToTransfer) {
     if (moistureTransferFunction(x, y, z, moistureToTransfer)) this.moisture -= moistureToTransfer;
   }
 
+  validateNutrientsTransfer(nutrientsTransferFunction, x, y, z, nutrientsToTransfer) {
+    if (nutrientsTransferFunction(x, y, z, nutrientsToTransfer)) this.nutrients -= nutrientsToTransfer;
+  }
+
   processMoisture() {
+    // do nothing
+  }
+
+  processNutrients() {
     // do nothing
   }
 
@@ -38,8 +56,10 @@ class Block {
 
   process(
     moistureTransferFunction,
+    nutrientsTransferFunction,
   ) {
     this.processMoisture(moistureTransferFunction);
+    this.processNutrients(nutrientsTransferFunction);
   }
 }
 

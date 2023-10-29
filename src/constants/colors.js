@@ -9,6 +9,9 @@ const DIRT_DRY = '#70502f';
 const AIR_WET = '#0000ff';
 const AIR_DRY = '#000000';
 
+const GRASS_DYING = '#FFFF00';
+const GRASS = '#00FF00';
+
 export {
   BROWN_1,
   BROWN_2,
@@ -18,4 +21,6 @@ export {
   DIRT_DRY,
   AIR_WET,
   AIR_DRY,
+  GRASS_DYING,
+  GRASS,
 };

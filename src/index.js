@@ -11,6 +11,7 @@ import { Dirt } from './dirt';
 import { Air } from './air';
 import { drawBlock } from './draw';
 import { Grid } from './grid';
+import { Grass } from './grass';
 
 const canvas = document.getElementById('canvas');
 const canvasContext = canvas.getContext('2d');
@@ -21,9 +22,18 @@ canvasContext.canvas.height = WINDOW_HEIGHT;
 const grid = new Grid(DISPLAY_SIZE_X, DISPLAY_SIZE_Y, LAYER_COUNT);
 
 grid.addLayer(2, () => new Air());
-grid.addLayer(1, () => new Air());
+grid.addLayer(1, () => new Grass());
 grid.addLayer(0, () => new Dirt());
-
+/*
+grid.addBlock(4, 4, 1, new Grass());
+grid.addBlock(4, 5, 1, new Grass());
+grid.addBlock(4, 6, 1, new Grass());
+grid.addBlock(4, 7, 1, new Grass());
+grid.addBlock(4, 8, 1, new Grass());
+grid.addBlock(4, 9, 1, new Grass());
+grid.addBlock(4, 10, 1, new Grass());
+grid.addBlock(4, 11, 1, new Grass());
+*/
 const validateBasedOnProbability = (probability) => {
   const random = Math.random();
   if (random < probability) {
@@ -39,7 +49,7 @@ const rain = () => {
     const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
     const randomY = Math.floor(Math.random() * DISPLAY_SIZE_Y);
 
-    grid.getBlock(randomX, randomY, 2).changeMoisture(300);
+    grid.getBlock(randomX, randomY, 2).changeMoisture(1000);
   }
 
   if (validateBasedOnProbability(0.95)) setTimeout(rain, 100);
@@ -64,7 +74,7 @@ const game = () => {
 
 const gameLoop = () => {
   game();
-  setTimeout(gameLoop, 100);
+  setTimeout(gameLoop, 1);
 };
 
 gameLoop();

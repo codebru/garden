@@ -32,7 +32,7 @@ class Grid {
 
   addBlock = (x, y, z, block) => {
     if (!this.checkValidGridPosition(x, y, z)) return false;
-    if (this.grid[x][y][z] === null) {
+    if (this.grid[x][y][z] === null || this.grid[x][y][z].constructor.name === 'Air') {
       this.grid[x][y][z] = block;
       return true;
     }
@@ -55,6 +55,14 @@ class Grid {
     return false;
   };
 
+  nutrientsTransferFunction = (x, y, z, nutrientsToTransfer) => {
+    if (!this.checkValidGridPosition(x, y, z)) return false;
+    if (this.grid[x][y][z] !== null) {
+      return this.grid[x][y][z].changeNutrients(nutrientsToTransfer);
+    }
+    return false;
+  };
+
   processBlock = (
     x,
     y,
@@ -73,6 +81,17 @@ class Grid {
           y + deltaY,
           z + deltaZ,
           moistureToTransfer,
+        ),
+        (
+          deltaX,
+          deltaY,
+          deltaZ,
+          nutrientsToTransfer,
+        ) => this.nutrientsTransferFunction(
+          x + deltaX,
+          y + deltaY,
+          z + deltaZ,
+          nutrientsToTransfer,
         ),
       );
     }

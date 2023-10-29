@@ -6,6 +6,11 @@ import { Block } from './block';
 const SATURATED = 66;
 
 class Dirt extends Block {
+  constructor() {
+    super();
+    this.nutrients = 1000;
+  }
+
   getColor = () => {
     if (this.moisture > 66) {
       return colors.DIRT_WET;
@@ -19,7 +24,6 @@ class Dirt extends Block {
     if (this.moisture > SATURATED) {
       let moistureToTransfer = (this.moisture - SATURATED) / 5;
       if (moistureToTransfer < 1) moistureToTransfer = 1;
-
       this.validateMoistureTransfer(moistureTransferFunction, -1, 0, 0, moistureToTransfer);
       this.validateMoistureTransfer(moistureTransferFunction, 1, 0, 0, moistureToTransfer);
       this.validateMoistureTransfer(moistureTransferFunction, 0, 1, 0, moistureToTransfer);
