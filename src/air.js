@@ -4,6 +4,11 @@ import {
 import { Block } from './block';
 
 class Air extends Block {
+  constructor(nutrients = 0) {
+    super();
+    this.nutrients = nutrients;
+  }
+
   getColor() {
     if (this.moisture > 0) {
       return colors.AIR_WET;

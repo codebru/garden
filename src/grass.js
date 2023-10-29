@@ -1,5 +1,6 @@
 import {
   colors,
+  MIN_MOISTURE,
   DRAW_PER_STEP_MOISTURE_GRASS,
   DRAW_PER_STEP_NUTRIENTS_GRASS,
   HEALTH_DROP_PER_STEP_GRASS,
@@ -26,6 +27,7 @@ class Grass extends Block {
     super();
     this.growth = 0;
     this.health = 100;
+    this.moistureExternal = 0;
   }
 
   isVisible = () => this.growth > 10;
@@ -73,6 +75,15 @@ class Grass extends Block {
     this.nutrients -= GROWTH_COST_NUTRIENTS_GRASS;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  changeMoisture(moistureToTransfer) {
+    if (this.moistureExternal + moistureToTransfer > MIN_MOISTURE) {
+      this.moistureExternal += moistureToTransfer;
+      return true;
+    }
+    return false;
+  }
+
   processMoisture(moistureTransferFunction) {
     if (!this.isAlive()) return;
     if (this.moisture >= 100) return;
@@ -83,6 +94,13 @@ class Grass extends Block {
       0,
       -1,
       -DRAW_PER_STEP_MOISTURE_GRASS,
+    );
+
+    moistureTransferFunction(
+      0,
+      0,
+      -1,
+      this.moistureExternal,
     );
   }
 
@@ -102,8 +120,12 @@ class Grass extends Block {
   process(
     moistureTransferFunction,
     nutrientsTransferFunction,
+    decomposeFunction,
   ) {
-    if (!this.isAlive()) return;
+    if (!this.isAlive()) {
+      decomposeFunction(this.growth);
+      return;
+    }
     this.processMoisture(moistureTransferFunction);
     this.processNutrients(nutrientsTransferFunction);
     this.runHealth();

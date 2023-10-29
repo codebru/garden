@@ -12,6 +12,7 @@ import { Air } from './air';
 import { drawBlock } from './draw';
 import { Grid } from './grid';
 import { Grass } from './grass';
+import { validateBasedOnProbability } from './utils';
 
 const canvas = document.getElementById('canvas');
 const canvasContext = canvas.getContext('2d');
@@ -34,13 +35,6 @@ grid.addBlock(4, 9, 1, new Grass());
 grid.addBlock(4, 10, 1, new Grass());
 grid.addBlock(4, 11, 1, new Grass());
 */
-const validateBasedOnProbability = (probability) => {
-  const random = Math.random();
-  if (random < probability) {
-    return true;
-  }
-  return false;
-};
 
 const rain = () => {
   // Hacky rain implementation
@@ -49,7 +43,7 @@ const rain = () => {
     const randomX = Math.floor(Math.random() * DISPLAY_SIZE_X);
     const randomY = Math.floor(Math.random() * DISPLAY_SIZE_Y);
 
-    grid.getBlock(randomX, randomY, 2).changeMoisture(1000);
+    grid.getBlock(randomX, randomY, 2).changeMoisture(100);
   }
 
   if (validateBasedOnProbability(0.95)) setTimeout(rain, 100);
@@ -74,7 +68,7 @@ const game = () => {
 
 const gameLoop = () => {
   game();
-  setTimeout(gameLoop, 1);
+  setTimeout(gameLoop, 100);
 };
 
 gameLoop();

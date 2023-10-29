@@ -1,3 +1,7 @@
+import { Air } from './air';
+import { validateBasedOnProbability } from './utils';
+import { PROBABILITY_DECOMPOSE } from './constants';
+
 class Grid {
   constructor(x, y, z) {
     this.x = x;
@@ -39,6 +43,8 @@ class Grid {
     return false;
   };
 
+  decomposeBlock = (x, y, z, nutrients) => this.grid[x][y][z] = new Air(nutrients);
+
   getBlock = (x, y, z) => {
     if (!this.checkValidGridPosition(x, y, z)) return null;
     if (this.grid[x][y][z] !== null) {
@@ -61,6 +67,10 @@ class Grid {
       return this.grid[x][y][z].changeNutrients(nutrientsToTransfer);
     }
     return false;
+  };
+
+  decomposeFunction = (x, y, z, growth) => {
+    if (validateBasedOnProbability(PROBABILITY_DECOMPOSE)) this.decomposeBlock(x, y, z, growth);
   };
 
   processBlock = (
@@ -92,6 +102,14 @@ class Grid {
           y + deltaY,
           z + deltaZ,
           nutrientsToTransfer,
+        ),
+        (
+          growth,
+        ) => this.decomposeFunction(
+          x,
+          y,
+          z,
+          growth,
         ),
       );
     }

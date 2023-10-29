@@ -1,8 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import { colors } from './constants';
-
-const MIN_MOISTURE = 0;
-const MIN_NUTRIENTS = 0;
+import {
+  MIN_MOISTURE,
+  MIN_NUTRIENTS,
+} from './constants';
 
 class Block {
   constructor() {
