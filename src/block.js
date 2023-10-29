@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
-import { colors } from './constants';
 import {
   MIN_MOISTURE,
   MIN_NUTRIENTS,
+  colors,
 } from './constants';
 
 class Block {
@@ -40,7 +40,13 @@ class Block {
   }
 
   validateNutrientsTransfer(nutrientsTransferFunction, x, y, z, nutrientsToTransfer) {
-    if (nutrientsTransferFunction(x, y, z, nutrientsToTransfer)) this.nutrients -= nutrientsToTransfer;
+    if (
+      nutrientsTransferFunction(
+        x,
+        y,
+        z,
+        nutrientsToTransfer,
+      )) this.nutrients -= nutrientsToTransfer;
   }
 
   processMoisture() {

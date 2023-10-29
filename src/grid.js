@@ -43,7 +43,7 @@ class Grid {
     return false;
   };
 
-  decomposeBlock = (x, y, z, nutrients) => this.grid[x][y][z] = new Air(nutrients);
+  decomposeBlock = (x, y, z, nutrients) => { this.grid[x][y][z] = new Air(nutrients); };
 
   getBlock = (x, y, z) => {
     if (!this.checkValidGridPosition(x, y, z)) return null;
