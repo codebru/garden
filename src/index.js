@@ -11,7 +11,7 @@ import { Dirt } from './dirt';
 import { Air } from './air';
 import { drawBlock } from './draw';
 import { Grid } from './grid';
-import { Grass } from './grass';
+import { Plant } from './plant';
 import { validateBasedOnProbability } from './utils';
 
 const canvas = document.getElementById('canvas');
@@ -23,17 +23,17 @@ canvasContext.canvas.height = WINDOW_HEIGHT;
 const grid = new Grid(DISPLAY_SIZE_X, DISPLAY_SIZE_Y, LAYER_COUNT);
 
 grid.addLayer(2, () => new Air());
-grid.addLayer(1, () => new Grass());
+grid.addLayer(1, () => new Plant());
 grid.addLayer(0, () => new Dirt());
 /*
-grid.addBlock(4, 4, 1, new Grass());
-grid.addBlock(4, 5, 1, new Grass());
-grid.addBlock(4, 6, 1, new Grass());
-grid.addBlock(4, 7, 1, new Grass());
-grid.addBlock(4, 8, 1, new Grass());
-grid.addBlock(4, 9, 1, new Grass());
-grid.addBlock(4, 10, 1, new Grass());
-grid.addBlock(4, 11, 1, new Grass());
+grid.addBlock(4, 4, 1, new Plant());
+grid.addBlock(4, 5, 1, new Plant());
+grid.addBlock(4, 6, 1, new Plant());
+grid.addBlock(4, 7, 1, new Plant());
+grid.addBlock(4, 8, 1, new Plant());
+grid.addBlock(4, 9, 1, new Plant());
+grid.addBlock(4, 10, 1, new Plant());
+grid.addBlock(4, 11, 1, new Plant());
 */
 
 const rain = () => {
