@@ -8,7 +8,12 @@ import {
   AIR_WET,
   AIR_DRY,
   PLANT_DYING,
-  PLANT,
+  PLANT_GREEN,
+  PLANT_1,
+  PLANT_2,
+  PLANT_3,
+  PLANT_4,
+  PLANT_5,
 } from './colors';
 
 const STEP = 10;
@@ -59,7 +64,12 @@ const colors = {
   AIR_WET,
   AIR_DRY,
   PLANT_DYING,
-  PLANT,
+  PLANT_GREEN,
+  PLANT_1,
+  PLANT_2,
+  PLANT_3,
+  PLANT_4,
+  PLANT_5,
 };
 
 export {

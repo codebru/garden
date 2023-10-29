@@ -20,6 +20,8 @@ import {
   GROWTH_COST_NUTRIENTS_PLANT,
 } from './constants';
 
+import { validateBasedOnProbability } from './utils';
+
 import { Block } from './block';
 
 class Plant extends Block {
@@ -28,17 +30,28 @@ class Plant extends Block {
     this.growth = 0;
     this.health = 100;
     this.moistureExternal = 0;
+    this.color = this.initColor();
   }
 
   isVisible = () => this.growth > 10;
 
   isAlive = () => this.health > 0;
 
+  // eslint-disable-next-line class-methods-use-this
+  initColor() {
+    if (validateBasedOnProbability(0.1)) return colors.PLANT_1;
+    if (validateBasedOnProbability(0.1)) return colors.PLANT_2;
+    if (validateBasedOnProbability(0.1)) return colors.PLANT_3;
+    if (validateBasedOnProbability(0.1)) return colors.PLANT_4;
+    if (validateBasedOnProbability(0.1)) return colors.PLANT_5;
+    return colors.PLANT_GREEN;
+  }
+
   getColor() {
     if (this.health < 50) {
       return colors.PLANT_DYING;
     }
-    return colors.PLANT;
+    return this.color;
   }
 
   runHealth() {
