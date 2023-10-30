@@ -164,8 +164,8 @@ class Plant extends Block {
   processPropogation(propogateFunction) {
     if (this.growth < PROPOGATION_GROWTH_THRESHOLD) return;
     if (validateBasedOnProbability(PROPOGATION_PROBABILITY)) {
-      const randomX = randomIntiger(-2, 2);
-      const randomY = randomIntiger(-2, 2);
+      const randomX = randomIntiger(1, 2) ? 1 : -1;
+      const randomY = randomIntiger(1, 2) ? 1 : -1;
       propogateFunction(
         randomX,
         randomY,
